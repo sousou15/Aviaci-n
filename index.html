@@ -1,0 +1,380 @@
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotación de imagen con ratón</title>
+    <style>
+        @font-face {
+    font-family: 'Qetod';
+    src: url('Wednesday.ttf') format('truetype'),
+      }
+
+        body {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url(fondo.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow-x: hidden;
+        }
+
+        h1{
+            font-family: 'Qetod';
+            font-size: 80px;
+            border: solid gray 1px;
+            background-color: #448aff; 
+            color:  #f0f0f0;/* Color de fondo que evoca el cielo */
+            border-radius: 15%;
+        }
+        .container {
+            width: 80%;
+            padding: 5%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            border: solid gray 1px;
+            background-color: #f0f0f0; /* Color de fondo que evoca el cielo */
+            border-radius: 25%;
+        }
+
+        #contenedorImagen {
+            width: 40%;
+            text-align: center;
+            margin-right: 5%;
+        }
+
+        #imagen {
+            border: solid 2px #448aff; /* Borde azul para la imagen */
+            border-radius: 50%;
+            max-width: 100%;
+            height: auto;
+            transition: transform 0.1s ease;
+        }
+
+        .contenedorInfo {
+            border: solid 2px #448aff; /* Borde azul para la información */
+            border-radius: 10px;
+            margin-left: 5%;
+            width: 60%;
+            padding: 20px;
+            background-color: #fff; /* Fondo blanco para la información */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        }
+
+        .contenedorPendiente {
+            width: 40%;
+            padding: 20px;
+            background-color: #fff; /* Fondo blanco para el formulario */
+            border: solid 2px #448aff; /* Borde azul para el formulario */
+            border-radius: 10px;
+        }
+
+        form {
+            max-width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #448aff; /* Color azul para las etiquetas */
+        }
+
+        input[type="number"] {
+            width: calc(100% - 16px); /* Ajuste para el padding */
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #448aff; /* Color de fondo azul para el botón */
+            color: #fff; /* Color de texto blanco para el botón */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2962ff; /* Color de fondo azul oscuro al pasar el ratón */
+        }
+
+        #resultado {
+            margin-top: 20px;
+        }
+
+        #resultado p {
+                color: #333; /* Color de texto principal */
+        }
+
+        .imghead {
+            position: absolute;
+            top: 20%;
+            transform: translateY(-50%);
+            animation: moveImage 5s infinite linear; /* Animación para mover la imagen */
+        }
+
+        #img2{
+            top: 100%;
+            margin-top: 20%;
+        }
+
+        #img3{
+            margin-top: 80%;
+            top: 100%
+        }
+        h4{
+            display: none;
+            color: rgb(187, 11, 11);
+        }
+        @keyframes moveImage {
+            0% {
+            left: -100%; /* Comienza fuera del header en el lado izquierdo */
+            }
+            100% {
+            left: 100%; /* Termina fuera del header en el lado derecho */
+            }
+        }
+        @media only screen and (max-width: 600px) {
+            .container{
+                display: none;
+            }
+            .imghead {
+                display: none; /* Oculta la imagen en dispositivos móviles */
+            }
+            h4{
+                display: block;
+            }
+            h1{
+                display: none;
+            }
+        }
+    </style>
+    </head>
+    
+    <body>
+        <h4>NO DISPONIBLE PARA DISPOSITIVOS MÓVILES</h4>
+    <img class="imghead" src="avion3.png   " alt="Imagen Movible">
+
+    <h1>Alabeo y fuerza g</h1>
+    <div class="container">
+        
+
+        <!-- Contenedor de la imagen -->
+        <div id="contenedorImagen">
+        <!-- Imagen -->
+        <img id="imagen" src="avion.png" alt="Descripción de la imagen">
+            <!-- Div para mostrar los grados -->
+            <div id="grados"></div>
+            <p style="color: rgb(255, 132, 0); font-weight: bold;">Gira el avión con el ratón.</p>
+        </div>
+
+
+        <!-- Contenedor de información -->
+        <div class="contenedorInfo">
+            <!-- Campo de entrada de texto para los grados -->
+            <input type="number" id="inputGrados" placeholder="Ingrese los grados">
+
+            <!-- Información sobre la fuerza g -->
+            <div class="info">
+            <h2>Fuerza g</h2>
+            <div>
+                La fuerza g es la fuerza gravitacional que experimenta un objeto debido a la atracción de la gravedad de la Tierra. Se mide en términos de la aceleración que produce en el objeto, con un valor estándar de aproximadamente 9.8 m/s^2 en la superficie terrestre.</div>
+            </div>
+        
+            <!-- Cálculo y resultado de 1/cos(x) -->
+            <div class="info">
+            <h2>Cálculo de 1/cos(x)</h2>
+            <div id="resultadoCalculo"></div>
+            </div>
+        
+            <!-- Campo de entrada de texto para el peso del usuario -->
+            <div class="info">
+            <h2>Peso del usuario</h2>
+            <input type="number" id="inputPeso" placeholder="Ingrese su peso">
+            </div>
+        
+            <!-- Resultado del peso multiplicado por la fuerza g -->
+            <div class="info">
+            <h2>Resultado del peso por la fuerza g</h2>
+            <div id="resultadoPeso"></div>
+            </div>        
+        </div>
+    </div>
+    <img id="img2" class="imghead" src="avion 5.png" alt="Imagen Movible">
+
+    <h1>Pendiente entre niveles de vuelo</h1>
+    <div class="container">
+        <div id="contenedorPendiente">
+            
+            <form id="formulario">
+            <label for="fl1">Nivel de vuelo 1 (FL):</label>
+            <input type="number" id="fl1" name="fl1" required>
+        
+            <label for="fl2">Nivel de vuelo 2 (FL):</label>
+            <input type="number" id="fl2" name="fl2" required>
+        
+            <label for="angulo">Ángulo de pendiente (grados):</label>
+            <input type="number" id="angulo" name="angulo" required>
+        
+            <input type="submit" value="Calcular">
+            </form>
+        </div>
+        <img id="imgniveles" src="avion2.png" alt="">
+        <div class="contenedorInfo" id="resultado"></div>
+    </div>
+    <img id="img3" class="imghead" src="avion4.png   " alt="Imagen Movible">
+
+    <h1>Regla de 1 en 60</h1>
+    <div class="container">
+        <form id="formulariob">
+        <label for="millasTotales">Millas Totales del Trayecto:</label>
+        <input type="number" id="millasTotales" name="millasTotales" required>
+
+        <label for="millasDesviacion">Milla de Desviación del Piloto:</label>
+        <input type="number" id="millasDesviacion" name="millasDesviacion" required>
+
+        <label for="millasDesviadas">Millas Desviadas por el Piloto:</label>
+        <input type="number" id="millasDesviadas" name="millasDesviadas" required>
+
+        <input type="submit" value="Calcular Desviación">
+        </form>
+        <div class="contenedorInfo"><img src="Fan_lines_and_correction_angle.png" alt="" width="400px" height="auto">En navegación aérea, la regla de 1 en 60 es una regla empírica que establece que si un piloto ha recorrido sesenta millas, entonces un error en la trayectoria de una milla es aproximadamente un error de 1° en el rumbo, y proporcionalmente más para errores mayores. </div>
+        
+        <div class="contenedorInfo" id="resultadob"></div>
+    </div>
+    <script>
+        var contenedorImagen = document.getElementById('contenedorImagen');
+    var imagen = document.getElementById('imagen');
+    var anguloInicial = 0;
+    var anguloActual = 0;
+    var xInicio; // Variable para almacenar la posición inicial X
+    var gradosDiv = document.getElementById('grados');
+    var inputGrados = document.getElementById('inputGrados');
+    var resultadoCalculoDiv = document.getElementById('resultadoCalculo');
+    var inputPeso = document.getElementById('inputPeso');
+    var resultadoPesoDiv = document.getElementById('resultadoPeso');
+
+    function actualizarRotacion(angulo) {
+    imagen.style.transform = `rotate(${angulo}deg)`;
+    gradosDiv.textContent = `Grados: ${angulo.toFixed(2)}`;
+    }
+
+    function calcularResultado(angulo) {
+    if (Math.abs(angulo) < 90) {
+        return (1 / Math.cos(angulo * Math.PI / 180)).toFixed(2);
+    } else {
+        return '∞';
+    }
+    }
+
+    function actualizarResultado(angulo) {
+    resultadoCalculoDiv.textContent = `Resultado de 1/cos(${Math.abs(angulo.toFixed(2))}) = ${calcularResultado(angulo)}`;
+    }
+
+    function calcularResultadoPeso(angulo, peso) {
+    var resultado = parseFloat(calcularResultado(angulo));
+    if (!isNaN(peso)) {
+        return (resultado * peso).toFixed(2);
+    }
+    return '';
+    }
+
+    function actualizarResultadoPeso(angulo, peso) {
+    resultadoPesoDiv.textContent = `Si el piloto pesa (${peso} kg) por la fuerza g pesaría ${calcularResultadoPeso(angulo, peso)} kg en ese momento.`;
+    }
+
+    function actualizarInteracciones(angulo, peso) {
+    actualizarRotacion(angulo);
+    actualizarResultado(angulo);
+    actualizarResultadoPeso(angulo, peso);
+    }
+
+    function mouseMoveHandler(event) {
+    var xActual = event.clientX;
+    var deltaX = xActual - xInicio;
+    anguloActual = anguloInicial + deltaX * 0.5;
+    anguloActual = anguloActual % 360;
+    inputGrados.value = anguloActual.toFixed(2);
+    actualizarInteracciones(anguloActual, parseFloat(inputPeso.value));
+    }
+
+    contenedorImagen.addEventListener('mousedown', function(e) {
+    anguloInicial = anguloActual;
+    xInicio = e.clientX;
+    document.addEventListener('mousemove', mouseMoveHandler);
+    document.addEventListener('mouseup', function() {
+        document.removeEventListener('mousemove', mouseMoveHandler);
+    });
+    });
+
+    inputGrados.addEventListener('input', function() {
+    var grados = parseFloat(this.value);
+    if (!isNaN(grados)) {
+        actualizarInteracciones(grados, parseFloat(inputPeso.value));
+    }
+    });
+
+    inputPeso.addEventListener('input', function() {
+    var peso = parseFloat(this.value);
+    if (!isNaN(peso)) {
+        actualizarInteracciones(parseFloat(inputGrados.value), peso);
+    }
+    });
+    document.getElementById('formulario').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var fl1 = parseFloat(document.getElementById('fl1').value);
+        var fl2 = parseFloat(document.getElementById('fl2').value);
+        var angulo = parseFloat(document.getElementById('angulo').value);
+        var imgniveles = document.getElementById('imgniveles');
+        imgniveles.style.transform = `rotate(${angulo}deg)`;
+
+        if (!isNaN(fl1) && !isNaN(fl2) && !isNaN(angulo)) {
+            var diferenciaAltura = Math.abs(fl2 - fl1) * 100; // Diferencia de altitud en pies (1 FL = 100 pies)
+            var distanciaHorizontal = Math.tan(angulo * Math.PI / 180) * diferenciaAltura;
+
+            document.getElementById('resultado').innerHTML = `
+            <p>La diferencia de altitud entre FL${fl1} y FL${fl2} es ${diferenciaAltura} pies.</p>
+            <p>A un ángulo de pendiente de ${angulo} grados, la distancia horizontal entre los dos niveles de vuelo es aproximadamente ${distanciaHorizontal.toFixed(2)} pies.</p>
+            `;
+        } else {
+            document.getElementById('resultado').innerHTML = '<p>Por favor, introduzca números válidos en todos los campos.</p>';
+        }
+        });
+
+    document.getElementById('formulariob').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var millasTotales = parseFloat(document.getElementById('millasTotales').value);
+    var millasDesviacion = parseFloat(document.getElementById('millasDesviacion').value);
+    var millasDesviadas = parseFloat(document.getElementById('millasDesviadas').value);
+
+    if (!isNaN(millasTotales) && !isNaN(millasDesviacion) && !isNaN(millasDesviadas)) {
+        var desviacion = millasDesviadas;
+        var desviacionEnGrados = (desviacion * 60 / millasDesviacion);
+        var resto = millasTotales - millasDesviacion;
+        var waypoint = (desviacion * 60 / resto);
+        var correccion_millas = desviacionEnGrados + waypoint;
+        document.getElementById('resultadob').innerHTML = `
+        <p>El piloto se dio cuenta de la desviación en la milla ${millasDesviacion}.</p>
+        <p>La cantidad total de millas desviadas por el piloto es ${desviacion} millas.</p>
+        <p>Esto representa aproximadamente ${correccion_millas.toFixed(2)} grados de desviación.</p>
+        `;
+    } else {
+        document.getElementById('resultadob').innerHTML = '<p>Por favor, introduzca números válidos en todos los campos.</p>';
+    }
+    });
+    </script>
+    </body>
+    </html>
