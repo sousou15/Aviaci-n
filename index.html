@@ -121,7 +121,7 @@
             position: absolute;
             top: 20%;
             transform: translateY(-50%);
-            animation: moveImage 5s infinite linear; /* Animación para mover la imagen */
+            animation: moveImage 6s infinite ease-in; /* Animación para mover la imagen */
         }
 
         #img2{
@@ -342,7 +342,7 @@
 
         if (!isNaN(fl1) && !isNaN(fl2) && !isNaN(angulo)) {
             var diferenciaAltura = Math.abs(fl2 - fl1) * 100; // Diferencia de altitud en pies (1 FL = 100 pies)
-            var distanciaHorizontal = Math.tan(angulo * Math.PI / 180) * diferenciaAltura;
+            var distanciaHorizontal =  diferenciaAltura / Math.tan(angulo * Math.PI / 180) ;
 
             document.getElementById('resultado').innerHTML = `
             <p>La diferencia de altitud entre FL${fl1} y FL${fl2} es ${diferenciaAltura} pies.</p>
